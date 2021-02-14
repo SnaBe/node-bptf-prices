@@ -19,7 +19,7 @@ describe('bptf-prices tests', () => {
             try {
                 const bptf = new bptfprices({ apiKey: process.argv[2] });
 
-                const res = bptf
+                // Perform the test
             } catch (error) {
                 throw error;
             }
