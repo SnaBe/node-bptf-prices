@@ -52,7 +52,7 @@ class EconomyWrapper {
         const callback = (typeof args[args.length - 1] === 'function') ? args.pop() : null;
 
         // The parameters should be an object
-        if (typeof params !== 'object') throw new Error('The request parameters must be an object.');
+        //if (typeof params !== 'object') throw new Error('The request parameters must be an object.');
 
         // Return the request parameters and callback
         return { params, callback };
@@ -60,13 +60,15 @@ class EconomyWrapper {
 
     /**
      * Get currency data for Team Fortress 2.
-     * @param { ...any } args An object of valid arguments for the v1 IGetCurrencies endpoint. 
+     * @param { ...any } args An object of valid arguments for the IGetCurrencies/v1 endpoint. 
+     * @param { Number } args.raw If set, modifies the raw value for the price index objects.
+     * @param { Function } callback Optional, called when a response is available. If omitted the function returns a promise.
      */
     getCurrencies(...args) {
         // Get the request parameters and callback
         const { params, callback } = this.#params(args);
 
-        // If the price index should have a high or averate raw value
+        // If the price index should have a high or average raw value
         params.raw = params.raw || 1;
 
         // Return the response from the IGetCurrencies endpoint
@@ -75,14 +77,21 @@ class EconomyWrapper {
 
     /**
      * Gets the price history for an item that corresponds to the parameters. If none, returns the price history for Mann Co. Keys.
-     * @param { ...any } args An object of valid arguments for the v1 IGetPriceHistory endpoint. 
+     * @param { ...any } args An object of valid arguments for the v1 IGetPriceHistory endpoint. All are optional and have default values.
+     * @param { Number } args.appid The appid of the item, defaults 440 (Team Fortress 2).
+     * @param { String } args.item The item's base name, defaults to Mann Co. Supply Crate Key.
+     * @param { String } args.quality The item's quality property, defaults to Unique.
+     * @param { Number | String } args.tradable The item's tradeable state, defaults to Tradable.
+     * @param { Number | String } args.craftable The item's craftable state, defaults to Craftable.
+     * @param { Number } args.priceindex The item's price index as a number.
+     * @param { Function } callback Optional, called when a response is available. If omitted the function returns a promise.
      */
     getPriceHistory(...args) {
         // Get the request parameters and callback
         const { params, callback } = this.#params(args);
 
-        // Assign the appid the supplied value, defaults to 440 (Appid for Team Fortress 2)
-        params.appid = params.appid || this.EAppIds.TF2;
+        // Assign the appid the supplied value, defaults to 440 (Team Fortress 2)
+        params.appid = params.appid || 440;
         
         // The item's base name.
         params.item = params.item || 'Mann Co. Supply Crate Key';
@@ -104,14 +113,17 @@ class EconomyWrapper {
     }
 
     /**
-     * Gets the price schema. Won't work for games that aren't TF2 with the response being cached globally for 900 seconds. 
-     * @param { ...any } args An object of valid arguments for the IGetSpecialItems endpoint. 
+     * Gets the price schema. Won't work for games that aren't TF2, with the response being cached globally for 900 seconds. 
+     * @param { ...any } args An object of valid arguments for the IGetSpecialItems endpoint. All are optional and have default values.
+     * @param { Number } args.raw If set, modifies the raw value for the price index objects.
+     * @param { Number } args.since If set, only returns prices that have a last_update value greater than or equal to this UNIX time.
+     * @param { Function } callback Optional, called when a response is available. If omitted the function returns a promise.
      */
     getPrices(...args) {
         // Get the request parameters and callback
         const { params, callback } = this.#params(args);
 
-        // If the price index should have a high or averate raw value
+        // If the price index should have a high or average raw value
         params.raw = params.raw || 1;
        
         // Sets the provided unix time or gets the current one
@@ -135,6 +147,10 @@ class EconomyWrapper {
         // Return the response from the v1 IGetSpecialItems endpoint
         return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${params.appid}&key=${this.apiKey}`, callback);
     }
+
+    runExample(object, callback) {
+        console.log(object, typeof callback)
+    }
 }
 
 // Export the EconomyWrapper class
@@ -144,7 +160,7 @@ const prices = new EconomyWrapper({ apiKey: '58b447a30e2cad7d006d878b' });
 
 (async () => {
     try {
-        const res = await prices.getSpecialItems({ appid: prices.EAppIds.TF2 });
+        const res = await prices.getSpecialItems((err, items) => console.log(items));
 
         console.log(res);
 
