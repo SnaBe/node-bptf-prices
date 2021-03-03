@@ -3,13 +3,15 @@ const axios = require('axios');
 
 // Wrapper class for the Backpack.tf economy Web API
 class EconomyWrapper {
+    // The user's API key should be a private field
+    #apiKey;
     /**
      * Constructs a new bptf-prices instance.
      * @param { Object } options An object containing valid constructor options.
      */
     constructor(options) {
         // A Backpack.tf API key is required to make requests
-        this.apiKey = options && options.apiKey || null;
+        this.#apiKey = options && options.apiKey || null;
     }
 
     /**
@@ -52,7 +54,8 @@ class EconomyWrapper {
         const callback = (typeof args[args.length - 1] === 'function') ? args.pop() : null;
 
         // The parameters should be an object
-        //if (typeof params !== 'object') throw new Error('The request parameters must be an object.');
+        console.log(typeof params)
+        if (typeof params !== 'object' && typeof params !== 'function') throw new Error('The request parameters must be an object or Function.');
 
         // Return the request parameters and callback
         return { params, callback };
@@ -72,7 +75,7 @@ class EconomyWrapper {
         params.raw = params.raw || 1;
 
         // Return the response from the IGetCurrencies endpoint
-        return this.#GET(`https://backpack.tf/api/IGetCurrencies/v1?raw=${params.raw}&key=${this.apiKey}`, callback);
+        return this.#GET(`https://backpack.tf/api/IGetCurrencies/v1?raw=${params.raw}&key=${this.#apiKey}`, callback);
     }
 
     /**
@@ -109,7 +112,7 @@ class EconomyWrapper {
         params.priceindex = params.priceindex || 0;
 
         // Return the response from the IGetPriceHistory endpoint
-        return this.#GET(`https://backpack.tf/api/IGetPriceHistory/v1?appid=${params.appid}&item=${params.item}&quality=${params.quality}&tradable=${params.tradable}&craftable=${params.craftable}&priceindex=${params.priceindex}&key=${this.apiKey}`, callback);
+        return this.#GET(`https://backpack.tf/api/IGetPriceHistory/v1?appid=${params.appid}&item=${params.item}&quality=${params.quality}&tradable=${params.tradable}&craftable=${params.craftable}&priceindex=${params.priceindex}&key=${this.#apiKey}`, callback);
     }
 
     /**
@@ -130,12 +133,14 @@ class EconomyWrapper {
         params.since = params.since || Math.round((new Date()).getTime() / 1000);
         
         // Return the response from the IGetPrices endpoint
-        return this.#GET(`https://backpack.tf/api/IGetPrices/v4?raw=${params.raw}&since=${params.since}&key=${this.apiKey}`, callback);
+        return this.#GET(`https://backpack.tf/api/IGetPrices/v4?raw=${params.raw}&since=${params.since}&key=${this.#apiKey}`, callback);
     }
 
     /**
      * Get Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
      * @param {...any} args An object of valid arguments for the v4 IGetPrices endpoint. 
+     * @param { Number } args.appid The appid of the item, defaults 440 (Team Fortress 2).
+     * @param { Function } callback Optional, called when a response is available. If omitted the function returns a promise.
      */
     getSpecialItems(...args) {
         // Get the request parameters and callback
@@ -145,32 +150,30 @@ class EconomyWrapper {
         params.appid = params.appid || '440';
 
         // Return the response from the v1 IGetSpecialItems endpoint
-        return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${params.appid}&key=${this.apiKey}`, callback);
+        return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${params.appid}&key=${this.#apiKey}`, callback);
     }
 
-    runExample(object, callback) {
-        console.log(object, typeof callback)
+    example(params, callback) {
+        console.log(typeof params, typeof callback);
     }
 }
 
 // Export the EconomyWrapper class
 module.exports = EconomyWrapper;
 
-const prices = new EconomyWrapper({ apiKey: '58b447a30e2cad7d006d878b' });
-
 (async () => {
+    const Economy = new EconomyWrapper({ apiKey: '58b447a30e2cad7d006d878b' });
+
+    Economy.example({ item: 'Glove Case', appid: 730 }, (err, example) => {});
+
     try {
-        const res = await prices.getSpecialItems((err, items) => console.log(items));
+        const res = await Economy.getCurrencies((err, items) => {
+            if (err) return console.log(err.message);
+
+            console.log(items);
+        });
 
         console.log(res);
-
-        /*prices.runExample({ appid: prices.EAppIds.TF2 }, (err, history) => {
-            if (err) {
-                console.error(err.message)
-            } else {
-                console.log(history);
-            }
-        }); */
     } catch (error) {
         console.error(error.message);
     }
