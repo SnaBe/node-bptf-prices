@@ -1,119 +1,109 @@
-// Mocha & Chai are used for testing
+// Mocha & Chai are used for Unit testing
 const expect = require('chai').expect;
 
 // Replace this with const bptfprices = require('bptf-prices'); if used outside of the module directory
 const bptfprices = require('../index');
 
-// 
-const bptf = new bptfprices({ apiKey: '58b447a30e2cad7d006d878b' });
+// Use a global instance for testing 
+const bptf = new bptfprices({ apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXX' });
 
 // Perform the tests
-describe('bptf-prices tests', () => {
+describe('bptf-prices tests', function () {
     // Class constructor test
-    describe('instance of constructor', () => {
+    describe('instance of constructor', function () {
         // Instance should match class
-        it('should be instance of bptf-prices', () => {
+        it('should be instance of bptf-prices', function () {
             // Expect that the target is an instance of the given constructor
             expect(bptf).to.be.an.instanceof(bptfprices);
         });
     });
 
-
+    // Get currency data for Team Fortress 2
     describe('getCurrencies', () => {
+        // The function should return an object with Team Fortress 2 currency data
         it('should return currency data from Team Fortress 2', (done) => {
-            try {
-                // Get currency data for Team Fortress 2
-                bptf.getCurrencies({ raw: 2 }, (err, data) => {
-                    // Error getting currency data
-                    if (err) throw err; console.log(err);
+            // Get currency data for Team Fortress 2
+            bptf.getCurrencies({ raw: 2, callback: (err, data) => {
+                // Error getting currency data
+                if (err) return done(err);
 
-                    // The response should have status code 200 (ok),
-                    // it should also be an object
-                    // and must have a property named error 
-                    expect(data).to.be.an('object');
-                    expect(data).to.have.property('currencies');
-                    expect(data.currencies).to.be.an('array');
-                    expect(data.currencies).to.have.length(3);
+                // The response should have status code 200 (ok),
+                // it should also be an object
+                // and must have a property named currencies 
+                expect(data).to.be.an('object');
+                expect(data).to.have.property('currencies');
 
-                    done();
-                });
-            } catch (error) {
-                // Throw the error that was caught 
-                throw error;
-            }
+                // Call done to end the test when the callback is invoked
+                done();
+            }});
         });
     });
 
-
+    // Gets the price history for a Team Fortress 2 item
     describe('getPriceHistory', () => {
+        // The function should return an array containing price history data for a Strange Antarctic Eyewear
         it('should return the price history of an item', (done) => {
-            try {
-                // Get the price history for a Unique Team Captain
-                bptf.getPriceHistory({ item: 'Team Captain', quality: 'Strange' }, (err, item) => {
-                    // Error getting the item's price history
-                    if (err) throw err;
+            // Get the price history for a Strange Antarctic Eyewear
+            bptf.getPriceHistory({ item: 'Antarctic Eyewear', quality: 'Strange', callback: (err, item) => {
+                // Error getting the item's price history
+                if (err) return done(err);
 
-                    // The response should have status code 200 (ok),
-                    // it should also be an object
-                    // and must have a property named error 
-                    expect(item).to.be.an('object');
-                    expect(item).to.have.property('history');
-                    expect(item.history).to.be.an('array');
+                // The response should have status code 200 (ok),
+                // it should also be an object
+                // and must have a property named history
+                // The history property should be an array with any given length
+                expect(item).to.be.an('object');
+                expect(item).to.have.property('history');
+                expect(item.history).to.be.an('array');
 
-                    done();
-                });
-            } catch (error) {
-                // Throw the error that was caught 
-                throw error;
-            }
+                // Call done to end the test when the callback is invoked
+                done();
+            }});
         });
     });
 
+    // Gets the Team Fortress 2 price schema
+    describe('getPrices', function () {
+        // The function should return an object of Team Fortress 2 price data
+        it('should return price data from Team Fortress 2', function (done) {
+            // Perform the getPrices request
+            bptf.getPrices({ raw: 1, since: 1611752400, callback: (err, prices) => {
+                // Error getting prices
+                if (err) return done(err);
 
-    describe('getPrices', () => {
-        it('should return currency data from Team Fortress 2', (done) => {
-            try {
-                // Perform the getCurrencies request
-                bptf.getPrices({ raw: 1, since: 1611752400 }, (err, prices) => {
-                    // Error getting prices
-                    if (err) throw err;
+                // The response should have status code 200 (ok),
+                // it should also be an object
+                // and must have a property named items 
+                expect(prices).to.be.an('object');
+                expect(prices).to.have.property('items');
 
-                    // The response should have status code 200 (ok),
-                    // it should also be an object
-                    // and must have a property named error 
-                    expect(prices).to.be.an('object');
-                    expect(prices).to.have.property('items');
-
-                    done();
-                });
-            } catch (error) {
-                // Throw the error that was caught 
-                throw error;
-            }
+                // Call done to end the test when the callback is invoked
+                done();
+            }});
         });
     });
 
-    
-    describe('getSpecialItems', () => {
-        it('should return currency data from Team Fortress 2', (done) => {
-            try {
-                // Perform the getCurrencies request
-                bptf.getSpecialItems({appid: 440 }, (err, items) => {
-                    // Error getting Backpack.tf's special items
-                    if (err) throw err;
+    // Get Backpack.tf's internal item placeholders
+    describe('getSpecialItems', function () {
+        // The function should return an object of Team Fortress 2 currency data
+        it('should return Backpack.tf\'s item placeholders from Team Fortress 2', function (done) {
+            // Perform the getSpecialItems request
+            bptf.getSpecialItems({ appid: 440, callback: (err, specials) => {
+                // Error getting Backpack.tf's special items
+                if (err) return done(err);
 
-                    // The response should have status code 200 (ok),
-                    // it should also be an object
-                    // and must have a property named error 
-                    expect(items).to.be.an('object');
-                    expect(items).to.have.property('response');
+                // The response should have status code 200 (ok),
+                // it should also be an object
+                // and must have a property named items
+                // The items property should be an array with a length of 1
+                expect(specials).to.be.an('object');
+                expect(specials).to.have.property('items');
+                expect(specials.items).to.be.an('array');
+                expect(specials.items).to.have.length(1);
 
-                    done();
-                });
-            } catch (error) {
-                // Throw the error that was caught 
-                throw error;
-            }
+                // Call done to end the test when the callback is invoked
+                done();
+            }});
         });
     });
 });

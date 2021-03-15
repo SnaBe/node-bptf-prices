@@ -47,7 +47,7 @@ class EconomyWrapper {
      * Get currency data for Team Fortress 2.
      * @param { Object } params An object of valid arguments for the IGetCurrencies/v1 endpoint. 
      * @param { Number } params.raw If set, modifies the raw value for the price index objects.
-     * @param { Function } params.callback Optional, called when a response is available. If omitted the function returns a promise.
+     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with Backpack.tf's internal currency data for Team Fortress 2.
      */
     getCurrencies({ raw = 1, callback }) {
@@ -56,15 +56,15 @@ class EconomyWrapper {
     }
 
     /**
-     * Gets the price history for an item that corresponds to the parameters. If none, returns the price history for the Team Captain.
-     * @param { Object } params An object of valid arguments for the v1 IGetPriceHistory endpoint. All are optional and have default values.
+     * Gets the price history for an item that corresponds to the parameters. If none, returns the price history for The Team Captain.
+     * @param { Object } params An object of valid arguments for the v1 IGetPriceHistory endpoint. All are "optional" and have default values.
      * @param { Number } params.appid The appid of the item, defaults 440 (Team Fortress 2).
      * @param { String } params.item The item's base name, defaults to Team Captain
      * @param { String } params.quality The item's quality property, defaults to Unique.
      * @param { Number } params.tradable The item's tradeable state, defaults to Tradable.
      * @param { Number } params.craftable The item's craftable state, defaults to Craftable.
      * @param { Number } params.priceindex The item's price index as a number.
-     * @param { Function } params.callback Optional, called when a response is available. If omitted the function returns a promise.
+     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with the price history that correspond to the `item` parameter.
      */
     getPriceHistory({ appid = 440, item = 'Team Captain', quality = 'Unique', tradable = 'Tradable', craftable = 'Craftable', priceindex = 0, callback }) {
@@ -77,7 +77,7 @@ class EconomyWrapper {
      * @param { Object } params An object of valid arguments for the IGetSpecialItems endpoint. All are optional and have default values.
      * @param { Number } params.raw If set, modifies the raw value for the price index objects.
      * @param { Number } params.since If set, only returns prices that have a last_update value greater than or equal to this UNIX time.
-     * @param { Function } params.callback Optional, called when a response is available. If omitted the function returns a promise.
+     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with the Team Fortress 2 price schema.
      */
     getPrices({ raw = 1, since = 1607000400, callback }) {        
@@ -87,36 +87,16 @@ class EconomyWrapper {
 
     /**
      * Get Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
-     * @param { Object } params An object of valid arguments for the v4 IGetPrices endpoint. 
+     * @param { Object } params An object of valid arguments for the IGetPrices endpoint. 
      * @param { Number } params.appid The appid of the item, defaults 440 (Team Fortress 2).
-     * @param { Function } params.callback Optional, called when a response is available. If omitted the function returns a promise.
+     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
-     */
+    */
     getSpecialItems({ appid = 440, callback }) {
         // Return the response from the v1 IGetSpecialItems endpoint
         return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${appid}&key=${this.#apiKey}`, callback);
-    }
-
-    /**
-     * 
-     * @param { Object } params - 
-     * @param { String} params.item
-     * @param { Number } params.appid 
-     * @param { Function } params.callback 
-     */
-    example({ item = 'Glove Case', appid = 730, callback }) {
-        if (typeof callback === 'function') {
-            callback(null, { item, appid });
-        }
-
-        return { item, appid };
     }
 }
 
 // Export the EconomyWrapper class
 module.exports = EconomyWrapper;
-
-(async () => {
-    const Economy = new EconomyWrapper({ apiKey: '58b447a30e2cad7d006d878b' });
-})();
-
