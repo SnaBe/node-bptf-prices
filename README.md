@@ -23,7 +23,7 @@ $ yarn add bptf-prices
 
 ## Testing
 
-**Note**: Make sure you've supplied a valid `API key` in the [test.js](test\test.js) file. 
+**Note**: Make sure you've supplied a valid `API key` in the [test.js](https://github.com/SnaBe/node-bptf-prices/blob/main/test/test.js) file. 
 
 ```bash
 $ npm test
