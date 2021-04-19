@@ -50,7 +50,7 @@ class EconomyWrapper {
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with Backpack.tf's internal currency data for Team Fortress 2.
      */
-    getCurrencies({ raw = 1, callback }) {
+    getCurrencies({ raw = 1, callback } = {}) {
         // Return the response from the IGetCurrencies endpoint
         return this.#GET(`https://backpack.tf/api/IGetCurrencies/v1?raw=${raw}&key=${this.#apiKey}`, callback);
     }
@@ -67,7 +67,7 @@ class EconomyWrapper {
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with the price history that correspond to the `item` parameter.
      */
-    getPriceHistory({ appid = 440, item = 'Team Captain', quality = 'Unique', tradable = 'Tradable', craftable = 'Craftable', priceindex = 0, callback }) {
+    getPriceHistory({ appid = 440, item = 'Team Captain', quality = 'Unique', tradable = 'Tradable', craftable = 'Craftable', priceindex = 0, callback } = {}) {
         // Return the response from the IGetPriceHistory endpoint
         return this.#GET(`https://backpack.tf/api/IGetPriceHistory/v1?appid=${appid}&item=${item}&quality=${quality}&tradable=${tradable}&craftable=${craftable}&priceindex=${priceindex}&key=${this.#apiKey}`, callback);
     }
@@ -80,7 +80,7 @@ class EconomyWrapper {
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with the Team Fortress 2 price schema.
      */
-    getPrices({ raw = 1, since = 1607000400, callback }) {        
+    getPrices({ raw = 1, since = 1607000400, callback } = {}) {        
         // Return the response from the IGetPrices endpoint
         return this.#GET(`https://backpack.tf/api/IGetPrices/v4?raw=${raw}&since=${since}&key=${this.#apiKey}`, callback);
     }
@@ -92,7 +92,8 @@ class EconomyWrapper {
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
     */
-    getSpecialItems({ appid = 440, callback }) {
+    getSpecialItems({ appid = 440, callback } = {}) {
+        console.log(appid);
         // Return the response from the v1 IGetSpecialItems endpoint
         return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${appid}&key=${this.#apiKey}`, callback);
     }
