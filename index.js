@@ -58,7 +58,7 @@ class EconomyWrapper {
     /**
      * Gets the price history for an item that corresponds to the parameters. If none, returns the price history for The Team Captain.
      * @param { Object } params An object of valid arguments for the v1 IGetPriceHistory endpoint. All are "optional" and have default values.
-     * @param { Number } params.appid The appid of the item, defaults 440 (Team Fortress 2).
+     * @param { Number } params.appid The appid of the item, defaults to 440 (Team Fortress 2).
      * @param { String } params.item The item's base name, defaults to Team Captain
      * @param { String } params.quality The item's quality property, defaults to Unique.
      * @param { Number } params.tradable The item's tradeable state, defaults to Tradable.
@@ -88,12 +88,11 @@ class EconomyWrapper {
     /**
      * Get Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
      * @param { Object } params An object of valid arguments for the IGetPrices endpoint. 
-     * @param { Number } params.appid The appid of the item, defaults 440 (Team Fortress 2).
+     * @param { Number } params.appid The appid of the item, defaults to 440 (Team Fortress 2).
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
     */
     getSpecialItems({ appid = 440, callback } = {}) {
-        console.log(appid);
         // Return the response from the v1 IGetSpecialItems endpoint
         return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${appid}&key=${this.#apiKey}`, callback);
     }
