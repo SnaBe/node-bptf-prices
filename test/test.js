@@ -44,7 +44,7 @@ describe('bptf-prices tests', function () {
         // The function should return an array containing price history data for a Strange Antarctic Eyewear
         it('should return the price history of an item', (done) => {
             // Get the price history for a Strange Antarctic Eyewear
-            bptf.getPriceHistory({ item: 'Antarctic Eyewear', quality: 'Strange', callback: (err, item) => {
+            bptf.getPriceHistory({ item: 'Antarctic Eyewear', quality: 'Strange', tradable: 'Tradable', callback: (err, item) => {
                 // Error getting the item's price history
                 if (err) return done(err);
 

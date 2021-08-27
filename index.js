@@ -5,10 +5,11 @@ const axios = require('axios');
 class EconomyWrapper {
     // The user's API key stored in a private field
     #apiKey;
+
     /**
      * Constructs a new bptf-prices instance.
      * @param { Object } options An object containing valid constructor options.
-     * @param { String } options.apiKey A Backpack.tf API key.
+     * @param { String } options.apiKey A Backpack.tf developer API key.
      */
     constructor(options) {
         // A Backpack.tf API key is required to make requests
@@ -35,7 +36,7 @@ class EconomyWrapper {
             // The callback parameter must be a function
             if (typeof callback === 'function') {
                 // Callback with the caught error
-                callback(error);
+                callback(error, null);
             } else {
                 // Throw the error if no callback was supplied
                 throw error;
@@ -51,6 +52,11 @@ class EconomyWrapper {
      * @returns { Object } An object with Backpack.tf's internal currency data for Team Fortress 2.
      */
     getCurrencies({ raw = 1, callback } = {}) {
+        // Type check the raw parameter
+        if (typeof raw !== 'number' || [1, 2].indexOf(raw) === -1) {
+            throw new Error(`Unexpected value "${raw}" for the "raw" parameter. Expected a numeric integer between 1 and 2.`);
+        }
+
         // Return the response from the IGetCurrencies endpoint
         return this.#GET(`https://backpack.tf/api/IGetCurrencies/v1?raw=${raw}&key=${this.#apiKey}`, callback);
     }
@@ -68,6 +74,32 @@ class EconomyWrapper {
      * @returns { Object } An object with the price history that correspond to the `item` parameter.
      */
     getPriceHistory({ appid = 440, item = 'Team Captain', quality = 'Unique', tradable = 'Tradable', craftable = 'Craftable', priceindex = 0, callback } = {}) {
+        // Type check the appid parameter is a number
+        if (typeof appid !== 'number' || appid !== 440) {
+            throw new Error(`Unexpected value "${appid}" for the "appid" parameter. Expected a numeric value of 440.`);
+        }
+
+        // Type check the item parameter
+        if (typeof item !== 'string' || item.length === 0) throw new Error('The item parameter is not a valid string or missing.');
+
+        // Type check the quality parameter
+        if (typeof quality !== 'string' || ['Normal', 'Unique', 'Vintage', 'Genuine', 'Strange', 'Unusual', 'Haunted', 'Collector\'s', 'Decorated', 'Community', 'Self-Made', 'Valve'].indexOf(quality) === -1) {
+            throw new Error(`Unexpected value "${quality}" for the "quality" parameter. Expected a string for the quality property of the item.`);
+        }
+
+        // Type check the tradable parameter
+        if (typeof tradable !== 'string' || ['Tradable', 'Non-Tradable'].indexOf(tradable) === -1) {
+            throw new Error(`Unexpected value "${tradable}" for the "tradable" parameter. Expected a string of "Tradable" or "Non-Tradable".`);
+        }
+
+        // Type check the craftable parameter
+        if (typeof craftable !== 'string' || ['Craftable', 'Non-Craftable'].indexOf(craftable) === -1) {
+            throw new Error(`Unexpected value "${craftable}" for the "craftable" parameter. Expected a string of "Craftable" or "Non-Craftable".`);
+        }
+
+        // Type check the priceindex parameter
+        if (typeof priceindex !== 'number') throw new Error('The priceindex parameter is not a number or missing.');
+
         // Return the response from the IGetPriceHistory endpoint
         return this.#GET(`https://backpack.tf/api/IGetPriceHistory/v1?appid=${appid}&item=${item}&quality=${quality}&tradable=${tradable}&craftable=${craftable}&priceindex=${priceindex}&key=${this.#apiKey}`, callback);
     }
@@ -80,7 +112,17 @@ class EconomyWrapper {
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Object } An object with the Team Fortress 2 price schema.
      */
-    getPrices({ raw = 1, since = 1607000400, callback } = {}) {        
+    getPrices({ raw = 1, since = 1607000400, callback } = {}) {
+        // Type check the raw parameter
+        if (typeof raw !== 'number' || [1, 2].indexOf(raw) === -1) {
+            throw new Error(`Unexpected value "${raw}" for the "raw" parameter. Expected a numeric integer between 1 and 2.`);
+        }
+        
+        // Type check the since parameter
+        if (typeof since !== 'number' || !(since > 0)) {
+            throw new Error('The since parameter is an invalid number or missing.');
+        }
+
         // Return the response from the IGetPrices endpoint
         return this.#GET(`https://backpack.tf/api/IGetPrices/v4?raw=${raw}&since=${since}&key=${this.#apiKey}`, callback);
     }
@@ -93,6 +135,11 @@ class EconomyWrapper {
      * @returns { Object } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
     */
     getSpecialItems({ appid = 440, callback } = {}) {
+        // Type check the appid parameter and ensure that the id is valid
+        if (typeof appid !== 'number' || appid !== 440) {
+            throw new Error(`Unexpected value "${appid}" for the "raw" parameter. Expected a numeric value of 440.`);
+        }
+        
         // Return the response from the v1 IGetSpecialItems endpoint
         return this.#GET(`https://backpack.tf/api/IGetSpecialItems/v1?appid=${appid}&key=${this.#apiKey}`, callback);
     }
