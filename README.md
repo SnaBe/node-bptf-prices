@@ -85,4 +85,4 @@ See the [Wiki pages](https://github.com/SnaBe/node-bptf-prices/wiki) for further
 
 [MIT](LICENSE)
 
-Copyright 2021, Simon S. Sørensen
+Copyright 2021, Simon Sørensen

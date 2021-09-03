@@ -20,7 +20,7 @@
     "web-api",
     "wrapper"
   ],
-  "author": "Simon S. Sørensen",
+  "author": "Simon Sørensen",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SnaBe/node-bptf-prices/issues"

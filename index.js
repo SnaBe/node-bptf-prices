@@ -49,7 +49,7 @@ class EconomyWrapper {
      * @param { Object } params An object of valid arguments for the IGetCurrencies/v1 endpoint. 
      * @param { Number } params.raw If set, modifies the raw value for the price index objects.
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Object } An object with Backpack.tf's internal currency data for Team Fortress 2.
+     * @returns { Promise<Object> | Function } An object with Backpack.tf's internal currency data for Team Fortress 2.
      */
     getCurrencies({ raw = 1, callback } = {}) {
         // Type check the raw parameter
@@ -71,7 +71,7 @@ class EconomyWrapper {
      * @param { Number } params.craftable The item's craftable state, defaults to Craftable.
      * @param { Number } params.priceindex The item's price index as a number.
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Object } An object with the price history that correspond to the `item` parameter.
+     * @returns { Promise<Object> | Function } An object with the price history that correspond to the `item` parameter.
      */
     getPriceHistory({ appid = 440, item = 'Team Captain', quality = 'Unique', tradable = 'Tradable', craftable = 'Craftable', priceindex = 0, callback } = {}) {
         // Type check the appid parameter is a number
@@ -110,7 +110,7 @@ class EconomyWrapper {
      * @param { Number } params.raw If set, modifies the raw value for the price index objects.
      * @param { Number } params.since If set, only returns prices that have a last_update value greater than or equal to this UNIX time.
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Object } An object with the Team Fortress 2 price schema.
+     * @returns { Promise<Object> | Function } An object with the Team Fortress 2 price schema.
      */
     getPrices({ raw = 1, since = 1607000400, callback } = {}) {
         // Type check the raw parameter
@@ -132,7 +132,7 @@ class EconomyWrapper {
      * @param { Object } params An object of valid arguments for the IGetPrices endpoint. 
      * @param { Number } params.appid The appid of the item, defaults to 440 (Team Fortress 2).
      * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Object } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
+     * @returns { Promise<Object> | Function } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
     */
     getSpecialItems({ appid = 440, callback } = {}) {
         // Type check the appid parameter and ensure that the id is valid
