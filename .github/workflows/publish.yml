@@ -1,7 +1,7 @@
-name: Publish to npmjs
+name: Publish | Ubuntu
 on:
   release:
-    types: created
+    types: [ created ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm publish

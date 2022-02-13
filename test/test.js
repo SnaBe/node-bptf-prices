@@ -5,7 +5,7 @@ const expect = require('chai').expect;
 const bptfprices = require('../index');
 
 // Use a global instance for testing 
-const bptf = new bptfprices({ apiKey: process.env.API_KEY || 'XXXXXXXXXXXXXXXXXXXXXXXX' });
+const bptf = new bptfprices({ apiKey: process.env.API_KEY });
 
 // Perform the tests
 describe('bptf-prices tests', function () {
