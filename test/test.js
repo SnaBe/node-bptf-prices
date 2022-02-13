@@ -4,6 +4,8 @@ const expect = require('chai').expect;
 // Replace this with const bptfprices = require('bptf-prices'); if used outside of the module directory
 const bptfprices = require('../index');
 
+console.log(process.env.API_KEY)
+
 // Use a global instance for testing 
 const bptf = new bptfprices({ apiKey: 'XXXXXXXXXXXXXXXXXXXXXXXX' });
 
