@@ -3,7 +3,6 @@ A Node.js wrapper for the Backpack.tf economy Web API.
 
 [![npm version](https://img.shields.io/npm/v/bptf-prices.svg)](https://npmjs.com/package/bptf-prices)
 [![npm downloads](https://img.shields.io/npm/dm/bptf-prices.svg)](https://npmjs.com/package/bptf-prices)
-[![dependencies](https://img.shields.io/david/SnaBe/node-bptf-prices.svg)](https://david-dm.org/SnaBe/node-bptf-prices)
 [![license](https://img.shields.io/npm/l/bptf-prices.svg)](https://github.com/SnaBe/node-bptf-prices/blob/master/LICENSE)
 [![paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/snabe)
 
