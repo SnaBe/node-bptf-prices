@@ -1,3 +1,4 @@
+// Wrapper class for the Backpack.tf economy Web API
 export declare class EconomyWrapper {
     /**
      * Constructs a new bptf-prices instance.
