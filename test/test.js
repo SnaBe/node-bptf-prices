@@ -1,4 +1,4 @@
-// Mocha & Chai are used for Unit testing
+// Mocha and Chai are used for Unit testing
 const expect = require('chai').expect;
 
 // Replace this with const bptfprices = require('bptf-prices'); if used outside of the module directory
