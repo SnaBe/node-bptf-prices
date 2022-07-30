@@ -79,6 +79,8 @@ bptf.getSpecialItems({
 })();
 ```
 
+There are some more examples available in the [test](https://github.com/SnaBe/node-bptf-prices/tree/main/test) directory.
+
 ## Documentation
 
 See the [Wiki pages](https://github.com/SnaBe/node-bptf-prices/wiki) for further documentation.
@@ -87,4 +89,4 @@ See the [Wiki pages](https://github.com/SnaBe/node-bptf-prices/wiki) for further
 
 [MIT](LICENSE)
 
-Copyright 2021, Simon Sørensen
+Copyright 2022, Simon Sørensen

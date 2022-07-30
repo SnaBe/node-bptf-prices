@@ -1,7 +1,9 @@
+// Export the EconomyWrapper class
+export = EconomyWrapper;
 /**
  * Wrapper class for the Backpack.tf economy Web API.
  */
-export declare class EconomyWrapper {
+declare class EconomyWrapper {
     /**
      * Constructs a new bptf-prices instance.
      * @param { any } options An object containing valid constructor options.
@@ -46,4 +48,7 @@ export declare class EconomyWrapper {
      * @returns { Promise<any> | Function } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
     */
     getSpecialItems({ appid, callback }?: any): Promise<any> | Function;
+
+    // Not sure why this has to be declared for types
+    #private;
 }
