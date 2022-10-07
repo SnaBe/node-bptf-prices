@@ -22,7 +22,7 @@ declare class EconomyWrapper {
      * Gets the price history for an item that corresponds to the parameters. If none, returns the price history for The Team Captain.
      * @param { any } params An object of valid arguments for the v1 IGetPriceHistory endpoint. All are "optional" and have default values.
      * @param { number } params.appid The appid of the item, defaults to 440 (Team Fortress 2).
-     * @param { string } params.item The item's base name, defaults to Team Captain
+     * @param { string } params.item The item's base name, defaults to Team Captain.
      * @param { string } params.quality The item's quality property, defaults to Unique.
      * @param { number } params.tradable The item's tradeable state, defaults to Tradable.
      * @param { number } params.craftable The item's craftable state, defaults to Craftable.

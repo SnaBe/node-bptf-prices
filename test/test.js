@@ -73,7 +73,7 @@ describe('bptf-prices tests', function () {
 
                 // The response should have status code 200 (ok),
                 // it should also be an object
-                // and must have a property named items 
+                // and must have a property named items
                 expect(prices).to.be.an('object')
                 expect(prices).to.have.property('items')
 

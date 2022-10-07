@@ -1,5 +1,5 @@
 # bptf-prices
-A Node.js wrapper for the Backpack.tf economy Web API. 
+A Node.js wrapper for the Backpack.tf economy Web API.
 
 [![npm version](https://img.shields.io/npm/v/bptf-prices.svg)](https://npmjs.com/package/bptf-prices)
 [![node version](https://img.shields.io/node/v/bptf-prices)](https://nodejs.org/en/about/releases/)
@@ -25,10 +25,16 @@ $ yarn add bptf-prices
 
 ## Testing
 
-**Note**: Make sure you've supplied a valid `API key` in the [test.js](https://github.com/SnaBe/node-bptf-prices/blob/main/test/test.js) file. 
+**Note**: Make sure you've supplied a valid `API key` in the [test.js](https://github.com/SnaBe/node-bptf-prices/blob/main/test/test.js) file.
 
+Using [npm](https://docs.npmjs.com/cli/v8/commands/npm-run-script):
 ```bash
 $ npm test
+```
+
+Using [yarn](https://classic.yarnpkg.com/lang/en/docs/cli/run/):
+```bash
+$ yarn test
 ```
 
 ## Examples
