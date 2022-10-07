@@ -20,7 +20,9 @@
 		"economy",
 		"currencies",
 		"web-api",
-		"wrapper"
+		"wrapper",
+		"callback",
+		"promise"
 	],
 	"author": "Simon Sørensen",
 	"license": "MIT",
