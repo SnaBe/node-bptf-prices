@@ -8,11 +8,11 @@ const bptfprices = require('../index')
 const bptf = new bptfprices({ apiKey: process.env.API_KEY })
 
 // Perform the tests
-describe('bptf-prices tests', function () {
+describe('bptf-prices tests', () => {
     // Class constructor test
-    describe('instance of constructor', function () {
+    describe('instance of constructor', () => {
         // Instance should match class
-        it('should be instance of bptf-prices', function () {
+        it('should be instance of bptf-prices', () => {
             // Expect that the target is an instance of the given constructor
             expect(bptf).to.be.an.instanceof(bptfprices)
         })
@@ -63,9 +63,9 @@ describe('bptf-prices tests', function () {
     })
 
     // Gets the Team Fortress 2 price schema
-    describe('getPrices', function () {
+    describe('getPrices', () => {
         // The function should return an object of Team Fortress 2 price data
-        it('should return price data from Team Fortress 2', function (done) {
+        it('should return price data from Team Fortress 2', (done) => {
             // Perform the getPrices request
             bptf.getPrices({ raw: 1, since: 1611752400, callback: (err, prices) => {
                 // Error getting prices
@@ -84,9 +84,9 @@ describe('bptf-prices tests', function () {
     })
 
     // Get Backpack.tf's internal item placeholders
-    describe('getSpecialItems', function () {
+    describe('getSpecialItems', () => {
         // The function should return an object of Team Fortress 2 currency data
-        it('should return Backpack.tf\'s item placeholders from Team Fortress 2', function (done) {
+        it('should return Backpack.tf\'s item placeholders from Team Fortress 2', (done) => {
             // Perform the getSpecialItems request
             bptf.getSpecialItems({ appid: 440, callback: (err, specials) => {
                 // Error getting Backpack.tf's special items
