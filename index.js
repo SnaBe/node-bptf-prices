@@ -1,5 +1,7 @@
 // Axios is a promise based HTTP client for Node.js
-const axios = require('axios').default
+const axios = require('axios')
+
+console.log(axios)
 
 // Wrapper class for the Backpack.tf economy Web API
 class EconomyWrapper {
