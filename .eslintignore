@@ -1,2 +1,2 @@
 test/**/*.js
-.eslintrc.js
+.eslintrc.json
