@@ -6,6 +6,7 @@
 	"types": "index.d.ts",
 	"scripts": {
 		"test": "mocha --require dotenv/config --timeout 5000",
+		"fix": "eslint -c .eslintrc.json . --fix",
 		"lint": "eslint -c .eslintrc.json ."
 	},
 	"repository": {
