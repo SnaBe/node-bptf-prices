@@ -28,10 +28,10 @@ class EconomyWrapper {
             if (typeof callback === 'function') {
                 // Callback with the response data
                 callback(null, response.data.response)
+            } else {
+                // Return the response data
+                return response.data.response
             }
-            
-            // Return the response data
-            return response.data.response
         }).catch(error => {
             // The callback parameter must be a function
             if (typeof callback === 'function') {
