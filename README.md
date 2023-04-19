@@ -1,13 +1,13 @@
 # bptf-prices
 A Node.js wrapper for the Backpack.tf economy Web API.
 
-[![npm version](https://img.shields.io/npm/v/bptf-prices.svg)](https://npmjs.com/package/bptf-prices)
-[![node version](https://img.shields.io/node/v/bptf-prices)](https://nodejs.org/en/about/releases/)
-[![npm test](https://img.shields.io/github/actions/workflow/status/SnaBe/node-bptf-prices/test.yml?logo=github&branch=main)](https://github.com/SnaBe/node-bptf-prices/actions/workflows/test.yml)
-[![dependencies](https://img.shields.io/librariesio/release/npm/bptf-prices)](https://www.npmjs.com/package/bptf-prices)
-[![npm downloads](https://img.shields.io/npm/dm/bptf-prices.svg)](https://npmjs.com/package/bptf-prices)
-[![license](https://img.shields.io/npm/l/bptf-prices.svg)](https://github.com/SnaBe/node-bptf-prices/blob/master/LICENSE)
-[![paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/snabe)
+[![npm version](https://img.shields.io/npm/v/bptf-prices.svg?style=flat-square)](https://npmjs.com/package/bptf-prices)
+[![node version](https://img.shields.io/node/v/bptf-prices?style=flat-square)](https://nodejs.org/en/about/releases/)
+[![npm test](https://img.shields.io/github/actions/workflow/status/SnaBe/node-bptf-prices/test.yml?logo=github&branch=main&style=flat-square)](https://github.com/SnaBe/node-bptf-prices/actions/workflows/test.yml)
+[![dependencies](https://img.shields.io/librariesio/release/npm/bptf-prices?style=flat-square)](https://www.npmjs.com/package/bptf-prices)
+[![npm downloads](https://img.shields.io/npm/dm/bptf-prices.svg?style=flat-square)](https://npmjs.com/package/bptf-prices)
+[![license](https://img.shields.io/npm/l/bptf-prices.svg?style=flat-square)](https://github.com/SnaBe/node-bptf-prices/blob/master/LICENSE)
+[![paypal](https://img.shields.io/badge/paypal-donate-yellow.svg?style=flat-square)](https://www.paypal.me/snabe)
 
 ## Installation
 
