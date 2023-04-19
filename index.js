@@ -1,25 +1,25 @@
 // Axios is a promise based HTTP client for Node.js
 const axios = require('axios')
 
-// Wrapper class for the Backpack.tf economy Web API
+/** Wrapper class for the Backpack.tf economy Web API */
 class EconomyWrapper {
     // The user's API key stored in a private field
     #apiKey
 
     /**
      * Constructs a new bptf-prices instance.
-     * @param { any } options An object containing valid constructor options.
+     * @param { EconomyOptions } options An object containing valid constructor options.
      * @param { string } options.apiKey A Backpack.tf developer API key.
      */
-    constructor(options) {
+    constructor({ apiKey = null } = {}) {
         // A Backpack.tf API key is required to make requests
-        this.#apiKey = options && options.apiKey || null
+        this.#apiKey = apiKey
     }
 
     /**
      * (`Private method`) - Make a `GET` request to the `endpoint` parameter.
      * @param { string } endpoint The API endpoint for which to submit the request.
-     * @param { Function } callback Optional, called when a response is available. If omitted the function returns a promise.
+     * @param { void } callback Optional, called when a response is available. If omitted the function returns a promise.
      */
     #GET(endpoint, callback) {
         // Return a promise if no callback is supplied
@@ -46,10 +46,10 @@ class EconomyWrapper {
 
     /**
      * Get currency data for Team Fortress 2.
-     * @param { any } params An object of valid arguments for the IGetCurrencies/v1 endpoint.
+     * @param { GetCurrenciesParameters } params An object of valid arguments for the IGetCurrencies/v1 endpoint.
      * @param { number } params.raw If set, modifies the raw value for the price index objects.
-     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Promise<any> | Function } An object with Backpack.tf's internal currency data for Team Fortress 2.
+     * @param { void } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
+     * @returns { Promise<GetCurrenciesResponse> | void } An object with Backpack.tf's internal currency data for Team Fortress 2.
      */
     getCurrencies({ raw = 1, callback } = {}) {
         // Type check the raw parameter
@@ -63,15 +63,15 @@ class EconomyWrapper {
 
     /**
      * Gets the price history for an item that corresponds to the parameters. If none, returns the price history for The Team Captain.
-     * @param { any } params An object of valid arguments for the v1 IGetPriceHistory endpoint. All are "optional" and have default values.
+     * @param { GetPriceHistoryParameters } params An object of valid arguments for the v1 IGetPriceHistory endpoint. All are "optional" and have default values.
      * @param { number } params.appid The appid of the item, defaults to 440 (Team Fortress 2).
      * @param { string } params.item The item's base name, defaults to Team Captain.
      * @param { string } params.quality The item's quality property, defaults to Unique.
      * @param { number } params.tradable The item's tradeable state, defaults to Tradable.
      * @param { number } params.craftable The item's craftable state, defaults to Craftable.
      * @param { number } params.priceindex The item's price index as a number.
-     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Promise<any> | Function } An object with the price history that correspond to the `item` parameter.
+     * @param { void } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
+     * @returns { Promise<GetPriceHistoryResponse> | void } An object with the price history that correspond to the `item` parameter.
      */
     getPriceHistory({ appid = 440, item = 'Team Captain', quality = 'Unique', tradable = 'Tradable', craftable = 'Craftable', priceindex = 0, callback } = {}) {
         // Type check the appid parameter is a number
@@ -106,11 +106,11 @@ class EconomyWrapper {
 
     /**
      * Gets the price schema. Won't work for games that aren't TF2, with the response being cached globally for 900 seconds.
-     * @param { any } params An object of valid arguments for the IGetSpecialItems endpoint. All are optional and have default values.
+     * @param { GetPricesParameters } params An object of valid arguments for the IGetSpecialItems endpoint. All are optional and have default values.
      * @param { number } params.raw If set, modifies the raw value for the price index objects.
-     * @param { number } params.since If set, only returns prices that have a last_update value greater than or equal to this UNIX time.
-     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Promise<any> | Function } An object with the Team Fortress 2 price schema.
+     * @param { number } params.since If set, only returns prices that have a last_update value greater than or equal to this Unix time.
+     * @param { void } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
+     * @returns { Promise<GetPricesResponse> | void } An object with the Team Fortress 2 price schema.
      */
     getPrices({ raw = 1, since = 1607000400, callback } = {}) {
         // Type check the raw parameter
@@ -129,10 +129,10 @@ class EconomyWrapper {
 
     /**
      * Get Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
-     * @param { any } params An object of valid arguments for the IGetPrices endpoint.
+     * @param { GetSpecialItemsParameters } params An object of valid arguments for the IGetPrices endpoint.
      * @param { number } params.appid The appid of the item, defaults to 440 (Team Fortress 2).
-     * @param { Function } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
-     * @returns { Promise<any> | Function } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
+     * @param { void } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
+     * @returns { Promise<GetSpecialItemsResponse> | void } An object with Backpack.tf's internal item placeholders that correspond to the `appid` parameter.
     */
     getSpecialItems({ appid = 440, callback } = {}) {
         // Type check the appid parameter and ensure that the id is valid
