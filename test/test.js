@@ -7,9 +7,9 @@ const bptfprices = require('../index')
 // Use a global instance for testing 
 const bptf = new bptfprices({ apiKey: process.env.API_KEY })
 
-// Perform the tests
+// The unit tests
 describe('bptf-prices tests', () => {
-    // Class constructor test
+    // Test and verify that the target is an instance of the given constructor
     describe('instance of constructor', () => {
         // Instance should match class
         it('should be instance of bptf-prices', () => {
@@ -29,9 +29,11 @@ describe('bptf-prices tests', () => {
 
                 // The response should have status code 200 (ok),
                 // it should also be an object
-                // and must have a property named currencies 
+                // and must have a property named currencies
+                // The currencies property should have a property named earbuds
                 expect(data).to.be.an('object')
                 expect(data).to.have.property('currencies')
+                expect(data.currencies).to.have.property('earbuds')
 
                 // Call done to end the test when the callback is invoked
                 done()
@@ -66,7 +68,7 @@ describe('bptf-prices tests', () => {
     describe('getPrices', () => {
         // The function should return an object of Team Fortress 2 price data
         it('should return price data from Team Fortress 2', (done) => {
-            // Perform the getPrices request
+            // Get all the price data from Backpack.tf since a given Unix time
             bptf.getPrices({ raw: 1, since: 1611752400, callback: (err, prices) => {
                 // Error getting prices
                 if (err) return done(err)
@@ -87,7 +89,7 @@ describe('bptf-prices tests', () => {
     describe('getSpecialItems', () => {
         // The function should return an object of Team Fortress 2 currency data
         it('should return Backpack.tf\'s item placeholders from Team Fortress 2', (done) => {
-            // Perform the getSpecialItems request
+            // Get Backpack.tf's special items for Team Fortress 2
             bptf.getSpecialItems({ appid: 440, callback: (err, specials) => {
                 // Error getting Backpack.tf's special items
                 if (err) return done(err)
