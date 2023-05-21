@@ -47,7 +47,7 @@ class EconomyWrapper {
     /**
      * Get currency data for Team Fortress 2.
      * @param { GetCurrenciesParameters } params An object of valid arguments for the IGetCurrencies/v1 endpoint.
-     * @param { number } params.raw If set, modifies the raw value for the price index objects.
+     * @param { number } params.raw If set, modifies the raw value for the price index objects by allowing or preventing averaging behavior.
      * @param { void } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Promise<GetCurrenciesResponse> | void } An object with Backpack.tf's internal currency data for Team Fortress 2.
      */
@@ -107,7 +107,7 @@ class EconomyWrapper {
     /**
      * Gets the price schema. Won't work for games that aren't TF2, with the response being cached globally for 900 seconds.
      * @param { GetPricesParameters } params An object of valid arguments for the IGetSpecialItems endpoint. All are optional and have default values.
-     * @param { number } params.raw If set, modifies the raw value for the price index objects.
+     * @param { number } params.raw If set, modifies the raw value for the price index objects by allowing or preventing averaging behavior.
      * @param { number } params.since If set, only returns prices that have a last_update value greater than or equal to this Unix time.
      * @param { void } [params.callback] Optional, called when a response is available. If omitted the function returns a promise.
      * @returns { Promise<GetPricesResponse> | void } An object with the Team Fortress 2 price schema.
